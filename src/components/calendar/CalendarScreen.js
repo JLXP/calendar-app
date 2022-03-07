@@ -1,6 +1,7 @@
 import React from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
 
 import {Navbar} from '../ui/Navbar';
 import { messages } from '../../helpers/calendar-messages';
@@ -11,11 +12,16 @@ import {CalendarModal} from './CalendarModal';
 
 import 'moment/locale/es';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { uiOpenModal } from '../../actions/ui';
+import {  eventSetActive } from '../../actions/events';
+import { AddNewFab } from '../ui/AddNewFab';
 
 moment.locale('es');
 
 const localizer = momentLocalizer(moment)
 
+
+//son los eventos que aparecen en el calendario
 const events = [{
   title:'Cumpleaños del jefe',
   start: moment().toDate(),
@@ -30,16 +36,20 @@ const events = [{
 
 export const CalendarScreen = () => {
 
+  const dispatch = useDispatch();
+
   const [lastView, setlastView] = useState(
     localStorage.getItem('lastView')||'month'
     );
 
   const onDoubleClick = (e) =>{
-    console.log(e);
+    dispatch(uiOpenModal());
   }
 
   const onSelectEvent = (e)=>{
-    console.log(e);
+    dispatch(eventSetActive(e));
+    dispatch(uiOpenModal());
+    
   }
 
   const onViewChange = (e) => {
@@ -47,7 +57,8 @@ export const CalendarScreen = () => {
     localStorage.setItem('lastView',e);
   }
 
-    const eventStyleGetter = (event, start, end, isSelect) =>{
+  //Se asignan los estilos del evento
+  const eventStyleGetter = (event, start, end, isSelect) =>{
 
       //Se asignaran estilos
       const style = {
@@ -84,6 +95,8 @@ export const CalendarScreen = () => {
         event:CalendarEvent
       }}
     />
+
+    <AddNewFab/>
     <CalendarModal/>
     </div>
   )
