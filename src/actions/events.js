@@ -1,7 +1,13 @@
 import { types } from "../types/types";
 
+export const eventStartAddNew = (event) => {
+    return async(dispatch) => {
 
-export const eventAddNew = (event)=>({
+    }
+}
+
+//solo se utiliza si se ejecuta todo bien
+const eventAddNew = (event)=>({
     type:types.eventAddNew,
     payload: event
 });

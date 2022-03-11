@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2';
 import {uiCloseModal} from '../../actions/ui'
-import { eventAddNew, eventClearActiveEvent, eventUpdated } from '../../actions/events';
+import {eventClearActiveEvent, eventStartAddNew, eventUpdated } from '../../actions/events';
 
 
 //estilos del modal
@@ -115,7 +115,7 @@ export const CalendarModal = () => {
             dispatch( eventUpdated(formValues));
         }else{
 
-            dispatch(eventAddNew({
+            dispatch(eventStartAddNew({
                 ...formValues,
                 id:new Date().getTime,
                 user:{
