@@ -12,6 +12,8 @@ import { PrivateRoute } from '../routes/PrivateRoute';
 export const AppRouter = () => {
 
   const dispatch = useDispatch();
+  //el uid sirve para saber si esta autenticado y el cheking se realiza despues de logearse y que 
+  //el token sea valido
   const {checking,uid} = useSelector(state=>state.auth);
 
   //esta funcion se ejecuta cada vez que se cambia de pagina
@@ -42,9 +44,6 @@ export const AppRouter = () => {
                 <CalendarScreen/>
               </PrivateRoute>}
             />
-
-
-
             <Route path='*' element={<Navigate to='/' />}/>
         </Routes>
     </BrowserRouter>

@@ -82,7 +82,7 @@ export const startChecking = () => {
 
 const checkingFinish = () =>({
     type: types.authCheckingFinish
-})
+});
 
 const login = ( user )=>({
     type: types.authLogin,
@@ -93,6 +93,7 @@ export const startLogout = () => {
     return (dispatch) => {
         //esto borra todo lo que se encuentra almacenado
         localStorage.clear();
+        dispatch(eventLogout());
         dispatch(logout());
     }
 }
@@ -100,6 +101,10 @@ export const startLogout = () => {
 const logout = () => ({
     type: types.authLogout
 })
+
+export const eventLogout = () =>({
+    type: types.eventLogout
+});
 
 
 
